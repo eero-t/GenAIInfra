@@ -38,6 +38,13 @@ Convert chart name to a string suitable as metric prefix
 {{- end }}
 
 {{/*
+Frontend metric name for top-level application
+*/}}
+{{- define "tgi.frontendMetricName" -}}
+{{- include "tgi.metricPrefix" . | trimSuffix "_tgi" }}_frontend_metric
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "tgi.labels" -}}

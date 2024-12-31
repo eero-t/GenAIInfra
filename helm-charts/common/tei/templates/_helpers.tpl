@@ -38,6 +38,13 @@ Convert chart name to a string suitable as metric prefix
 {{- end }}
 
 {{/*
+Frontend metric name for top-level application
+*/}}
+{{- define "tei.frontendMetricName" -}}
+{{- include "tei.metricPrefix" . | trimSuffix "_tei" }}_frontend_metric
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "tei.labels" -}}

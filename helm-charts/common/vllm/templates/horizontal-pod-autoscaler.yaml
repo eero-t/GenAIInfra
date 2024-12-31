@@ -11,7 +11,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ include "vllm.fullname" . }}
-  minReplicas: 1
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
   - type: Object
@@ -27,6 +27,11 @@ spec:
         #  https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#algorithm-details
         #  https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
         type: AverageValue
+{{- if .Values.autoscaling.useFrontendMetric }}
+        averageValue: {{ .Values.autoscaling.frontendMetricFactor }}
+      metric:
+        name: {{ include "vllm.frontendMetricName" . }}
+{{- else }}
 {{- if .Values.accelDevice }}
         averageValue: 0.1
 {{- else }}
@@ -35,6 +40,7 @@ spec:
 {{- end }}
       metric:
         name: {{ include "vllm.metricPrefix" . }}_token_latency
+{{- end }}
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 180

@@ -38,6 +38,13 @@ Convert chart name to a string suitable as metric prefix
 {{- end }}
 
 {{/*
+Frontend metric name for top-level application
+*/}}
+{{- define "teirerank.frontendMetricName" -}}
+{{- include "teirerank.metricPrefix" . | trimSuffix "_teirerank" }}_frontend_metric
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "teirerank.labels" -}}
