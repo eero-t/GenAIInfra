@@ -45,6 +45,13 @@ Frontend metric name for top-level application
 {{- end }}
 
 {{/*
+Frontend service name
+*/}}
+{{- define "vllm.frontendService" -}}
+{{- include "vllm.fullname" . | trimSuffix "-vllm" }}
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "vllm.labels" -}}

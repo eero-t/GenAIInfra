@@ -20,7 +20,11 @@ spec:
         apiVersion: v1
         # get metric for named object of given type (in same namespace)
         kind: Service
+{{- if .Values.autoscaling.useFrontendMetric }}
+        name: {{ include "vllm.frontendService" . }}
+{{- else }}
         name: {{ include "vllm.fullname" . }}
+{{- end }}
       target:
         # Metric is sum from all pods. "AverageValue" divides value returned from
         # the custom metrics API by the number of Pods before comparing to the target:

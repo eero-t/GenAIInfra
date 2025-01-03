@@ -45,6 +45,13 @@ Frontend metric name for top-level application
 {{- end }}
 
 {{/*
+Frontend service name
+*/}}
+{{- define "tei.frontendService" -}}
+{{- include "tei.fullname" . | trimSuffix "-tei" }}
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "tei.labels" -}}

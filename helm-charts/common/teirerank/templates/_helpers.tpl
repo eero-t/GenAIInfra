@@ -45,6 +45,13 @@ Frontend metric name for top-level application
 {{- end }}
 
 {{/*
+Frontend service name
+*/}}
+{{- define "teirerank.frontendService" -}}
+{{- include "teirerank.fullname" . | trimSuffix "-teirerank" }}
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "teirerank.labels" -}}

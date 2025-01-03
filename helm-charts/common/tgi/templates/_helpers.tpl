@@ -45,6 +45,13 @@ Frontend metric name for top-level application
 {{- end }}
 
 {{/*
+Frontend service name
+*/}}
+{{- define "tgi.frontendService" -}}
+{{- include "tgi.fullname" . | trimSuffix "-tgi" }}
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "tgi.labels" -}}
